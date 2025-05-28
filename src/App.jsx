@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import './App.scss'
 import Header from './components/Header/Header'
 import Routers from './config/Routes'
-
+import Footer from './components/Footer/Footer'
 function App() {
   console.log('App');
   return (
@@ -11,10 +11,8 @@ function App() {
           <div className="App">
             <>
               <Header/>
-              {/* <HeroSlider/> */}
-              {/* <Home/> */}
               <Routers/>
-              {/* <Footer /> */}
+              <Footer />
             </>
           </div>
     </Router>

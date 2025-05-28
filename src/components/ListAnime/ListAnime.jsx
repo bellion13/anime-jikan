@@ -57,7 +57,68 @@ const ListAnime = () => {
                     </Swiper>
                 </div>
             </div>
+            <div className="container">
+                <div className="list-anime-top">
+                    <h2 className='list-anime__title'>Movies</h2>
+                    <Button className="btn-outline list-anime__show">Show</Button>
+                </div>
+                <div className='list-anime-bottom'>
+                    <Swiper
+                        grabCursor={true}
+                        spaceBetween={10}
+                        slidesPerView={'auto'}
+                        breakpoints={{
+                            640: { slidesPerView: 2, spaceBetween: 20 },
+                            1024: { slidesPerView: 3, spaceBetween: 30 }
+                        }}
+                    >
+                        {animeList.map((anime) => (
+                            <SwiperSlide key={anime.mal_id}>
+                                <ItemAnime
+                                    image={anime.images.jpg.image_url}
+                                    title={anime.title}
+                                    rating={anime.score}
+                                    episodes={anime.episodes}
+                                    rank={anime.rank}
+                                    synopsis={anime.synopsis}
+                                />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                </div>
+            </div>
+            <div className="container">
+                <div className="list-anime-top">
+                    <h2 className='list-anime__title'>Anime</h2>
+                    <Button className="btn-outline list-anime__show">Show</Button>
+                </div>
+                <div className='list-anime-bottom'>
+                    <Swiper
+                        grabCursor={true}
+                        spaceBetween={10}
+                        slidesPerView={'auto'}
+                        breakpoints={{
+                            640: { slidesPerView: 2, spaceBetween: 20 },
+                            1024: { slidesPerView: 3, spaceBetween: 30 }
+                        }}
+                    >
+                        {animeList.map((anime) => (
+                            <SwiperSlide key={anime.mal_id}>
+                                <ItemAnime
+                                    image={anime.images.jpg.image_url}
+                                    title={anime.title}
+                                    rating={anime.score}
+                                    episodes={anime.episodes}
+                                    rank={anime.rank}
+                                    synopsis={anime.synopsis}
+                                />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                </div>
+            </div>
         </div>
+        
     )
 }
 
