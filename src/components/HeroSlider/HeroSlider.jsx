@@ -33,14 +33,14 @@ function HeroSlider() {
     fetchAnimes();
   }, []);
   useEffect(() => {
-  if (swiperInstance) {
-    if (isOpen) {
-      swiperInstance.autoplay.stop(); // Dừng khi mở modal
-    } else {
-      swiperInstance.autoplay.start(); // Tiếp tục khi đóng modal
+    if (swiperInstance) {
+      if (isOpen) {
+        swiperInstance.autoplay.stop(); // Dừng khi mở modal
+      } else {
+        swiperInstance.autoplay.start(); // Tiếp tục khi đóng modal
+      }
     }
-  }
-}, [isOpen, swiperInstance]);
+  }, [isOpen, swiperInstance]);
   // Gọi trailer khi nhấn nút
   const handleWatchTrailer = async (animeId) => {
     try {
@@ -73,6 +73,7 @@ function HeroSlider() {
         spaceBetween={30}
         slidesPerView={1}
         className='hero-slider'
+    
       >
         {animes.map((anime) => (
           <SwiperSlide key={anime.mal_id}>
@@ -94,7 +95,7 @@ function HeroSlider() {
         <button onClick={() => setIsOpen(false)} className="close-btn">×</button>
         {youtubeId ? (
           <iframe
-          
+
             width="100%"
             height="450"
             src={`https://www.youtube.com/embed/${youtubeId}`}

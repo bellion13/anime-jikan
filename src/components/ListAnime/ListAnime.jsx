@@ -49,6 +49,8 @@ const ListAnime = () => {
                                     title={anime.title}
                                     rating={anime.score}
                                     episodes={anime.episodes}
+                                    rank={anime.rank}
+                                    synopsis={anime.synopsis}
                                 />
                             </SwiperSlide>
                         ))}
