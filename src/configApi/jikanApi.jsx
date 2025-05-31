@@ -1,4 +1,4 @@
-// src/api/jikanApi.js
+
 import axios from 'axios';
 
 const api = axios.create({
