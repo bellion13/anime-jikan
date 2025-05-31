@@ -7,7 +7,7 @@ import './HeroSlider.scss';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-
+import { getTopAnime ,getAnimeTrailer } from '../../configApi/jikanApi';
 // import background from '../../assets/images/background.jpg';
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
@@ -22,9 +22,12 @@ function HeroSlider() {
   useEffect(() => {
     const fetchAnimes = async () => {
       try {
-        const res = await fetch('https://api.jikan.moe/v4/top/anime');
-        const data = await res.json();
-        setAnimes(data.data.slice(0, 5)); // Lấy top 5 anime
+        const res = await getTopAnime();
+        if (Array.isArray(res.data)) {
+          setAnimes(res.data.slice(0, 5)); // Lấy top 5 anime
+        } else {
+          console.log('Dữ liệu trả về lỗi:');
+        }
       } catch (error) {
         console.error('Lỗi gọi API:', error);
       }
@@ -42,22 +45,20 @@ function HeroSlider() {
     }
   }, [isOpen, swiperInstance]);
   // Gọi trailer khi nhấn nút
-  const handleWatchTrailer = async (animeId) => {
-    try {
-      const res = await fetch(`https://api.jikan.moe/v4/anime/${animeId}`);
-      const data = await res.json();
-      const id = data.data?.trailer?.youtube_id;
-      if (id) {
-        //  console.log("Trailer Youtube ID:", id)
-        setYoutubeId(id);
-        setIsOpen(true);
-      } else {
-        alert("Không có trailer");
-      }
-    } catch (err) {
-      console.error("Lỗi lấy trailer:", err);
+const handleWatchTrailer = async (animeId) => {
+  try {
+    const trailer = await getAnimeTrailer(animeId);
+    const id = trailer?.youtube_id;
+    if (id) {
+      setYoutubeId(id);
+      setIsOpen(true);
+    } else {
+      alert("Không có trailer");
     }
-  };
+  } catch (err) {
+    console.error("Lỗi lấy trailer:", err);
+  }
+};
   return (
 
     <>
@@ -73,9 +74,9 @@ function HeroSlider() {
         spaceBetween={30}
         slidesPerView={1}
         className='hero-slider'
-    
+
       >
-        {animes.map((anime) => (
+        {animes && animes.length > 0 && animes.map((anime) => (
           <SwiperSlide key={anime.mal_id}>
             <img
               src={anime.images.jpg.large_image_url}

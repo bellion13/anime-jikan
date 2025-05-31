@@ -1,26 +1,28 @@
-import React from 'react'
+import React from 'react';
 import Button from '../Button/Button';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/dist/border.css';
 import { CiPlay1 } from "react-icons/ci";
-import './ItemAnime.scss'
-const ItemAnime = ({ image, title, synopsis, rating, episodes, rank }) => {
-  console.log('ItemAnime', { image, title, synopsis, rating, episodes, rank });
+import { Link } from 'react-router-dom';
+
+import './ItemAnime.scss';
+
+const ItemAnime = ({ image, title, synopsis, rating, episodes, rank, mal_id }) => {
+  // console.log(mal_id);
   return (
-    <div className="list-anime__item">
+    <Link to={`/anime/${mal_id}`} className="list-anime__item">
       <Tippy 
         className="anime-tooltip"
         content={
           <div>
             <h4>{title}</h4>
             <p>{synopsis}</p>
-            <p><strong>BXH:</strong> {rank}</p>
+            <p><strong>BXH: #</strong> {rank}</p>
             <p><strong>Đánh giá:</strong> {rating}</p>
             <p><strong>Tập phim:</strong> {episodes}</p>
           </div>
         }
-
         placement="right"
         arrow={true}
         animation="fade"
@@ -39,11 +41,9 @@ const ItemAnime = ({ image, title, synopsis, rating, episodes, rank }) => {
         <Button className="list-anime__item__button__play">
           <CiPlay1 />
         </Button>
-        </div>
-    </div>
-    
+      </div>
+    </Link>
   );
 };
-
 
 export default ItemAnime;
