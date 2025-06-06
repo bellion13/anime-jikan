@@ -1,0 +1,92 @@
+@use "../../scss" as *;
+.detail-container {
+    width: 100%;
+    height: 95vh;
+    // position: relative;
+
+}
+.detail-background {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+.detail-body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+
+    justify-content: center;
+    
+}
+.detail-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 100%;
+    
+}
+.detail-image {
+    width: 350px;
+    height: 500px;
+
+    border-radius: 20px;
+}
+.detail-info {
+   gap: 10px;
+    padding-left: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    
+}
+.detail-title {
+    font-size: 42px;
+    font-weight: 700;
+}
+.characters{
+    display: flex;
+}
+.characters strong {
+    margin-right:4px ;
+}
+.character-list {
+    display: flex;;
+}
+///
+.trailer-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 42px;
+    padding: 0 12px;
+    & h2 {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+}
+.trailer-video {
+    width: 100%;
+    height: 500px;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    & iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+}

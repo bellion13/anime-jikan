@@ -1,20 +1,26 @@
 
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getAnimeDetails } from '../../configApi/jikanApi';
+import { getAnimeDetails, getAnimeCharacters } from '../../configApi/jikanApi';
 import './Detail.scss';
+import Trailer from './Trailer';
+import Similar from './Similar';
 const Detail = () => {
   const { id } = useParams();
   const [anime, setAnime] = useState(null);
-
-
+  const [characters, setCharacters] = useState([]);
   useEffect(() => {
     const fetchDetail = async () => {
       try {
-        console.log('Anime ID:', id);
+        // console.log('Anime ID:', id);
+
         const res = await getAnimeDetails(id);
         setAnime(res.data);
-        
+        // Lấy danh sách nhân vật
+        const charRes = await getAnimeCharacters(id);
+        // console.log('Characters:', charRes.data);
+        setCharacters(charRes)
+
       } catch (err) {
         console.error('Lỗi khi fetch chi tiết anime:', err);
       }
@@ -25,13 +31,35 @@ const Detail = () => {
 
   if (!anime) return <p>Loading...</p>;
   return (
-    <div className="detail-page p-4">
-      <h2 className="text-2xl font-bold">{anime.title}</h2>
-      <img src={anime.images.jpg.image_url} alt={anime.title} className="w-64 rounded my-4" />
-      <p><strong>Score:</strong> {anime.score}</p>
-      <p><strong>Episodes:</strong> {anime.episodes}</p>
-      <p className="mt-2"><strong>Synopsis:</strong> {anime.synopsis}</p>
+   <>
+    <div className="detail-container">
+      <div className="detail-background" style={{ backgroundImage: `url(${anime.images.jpg.image_url})` }}></div>
+      <div className="detail-body">
+        <div className="detail-content">
+          <img src={anime.images.jpg.image_url} alt={anime.title} className="detail-image" />
+          <div className="detail-info">
+            <h1 className="detail-title">{anime.title}</h1>
+            <p><strong>Đánh giá:</strong> {anime.score}</p>
+            <p><strong>Số tập:</strong> {anime.episodes}</p>
+            <p><strong>Giới thiệu :</strong> {anime.synopsis}</p>
+            <p><strong>Thể loại:</strong> {anime.genres.map((genre) => genre.name).join(', ')}</p>
+            <p><strong>Trạng thái:</strong> {anime.status}</p>
+            <p className='characters'><strong>Nhân Vật:</strong> 
+              <ul className="character-list">
+                {characters && characters.slice(0, 5).map((item) => (
+                  <li key={item.character.mal_id}>
+                    {item.character.name}
+                  </li>
+                ))}
+              </ul>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
+    <Trailer />
+    <Similar/>
+  </>
   );
 };
 

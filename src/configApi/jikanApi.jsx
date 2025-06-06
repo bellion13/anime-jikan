@@ -19,16 +19,25 @@ export const getMovieAnime = async (page = 1) => {
   const res = await api.get(`/anime?type=movie&page=${page}`);
     return res.data;
 };
+
 export const getAnimeDetails = async (id) => {
   const res = await api.get(`/anime/${id}`);
   return res.data;
+};
+export const getAnimeCharacters = async (id) => {
+  const res = await api.get(`/anime/${id}/characters`);
+  return res.data.data; // trả về mảng character
 };
 
 export const getAnimeTrailer = async (id) => {
   const res = await api.get(`/anime/${id}`);
   return res.data.data.trailer;
 };
-
+//aniem tương tự
+export const getAnimeSimilar = async (id) => {
+  const res = await api.get(`/anime/${id}/recommendations`);
+  return res.data.data; //
+};
 export const searchAnime = async (query) => {
   const res = await api.get(`/anime`, {
     params: {
@@ -37,9 +46,4 @@ export const searchAnime = async (query) => {
     },
   });
   return res.data;
-};
-
-export const getAnimeCharacters = async (id) => {
-  const res = await api.get(`/anime/${id}/characters`);
-  return res.data.data;
 };

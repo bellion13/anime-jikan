@@ -19,6 +19,7 @@ const headerNav = [
 ];
 
 const Header = () => {
+
   const { pathname } = useLocation();
   const headerRef = useRef(null);
   const active = headerNav.findIndex(e => e.path === pathname)
@@ -31,20 +32,20 @@ const Header = () => {
         headerRef.current.classList.remove('shrink');
       }
     };
-  
+
     window.addEventListener('scroll', shrinkHeader);
     return () => {
       window.removeEventListener('scroll', shrinkHeader);
     };
   }, []);
-  
+
   return (
     <div ref={headerRef} className='header'>
       <div className="header__wrap container">
-        <div className="logo">
-          <img src={logo} alt="" />
-          <Link to='/'>Ani Jikan</Link>
-        </div>
+        <Link to='/' className="logo">
+          <img src={logo} alt="Logo" />
+          Ani Jikan
+        </Link>
         <ul className="header__nav">
           {headerNav.map((item, index) => (
             <li key={index} className={index === active ? 'active' : ''}>

@@ -1,13 +1,13 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useEffect, useState } from 'react';
 import Button from './../../components/Button/Button';
-// import { OutlineButton } from '../../components/Button/Button';
+import { getTopAnime ,getAnimeTrailer } from '../../configApi/jikanApi';
+import { useNavigate } from 'react-router-dom';
 
 import './HeroSlider.scss';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { getTopAnime ,getAnimeTrailer } from '../../configApi/jikanApi';
 // import background from '../../assets/images/background.jpg';
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
@@ -24,7 +24,7 @@ function HeroSlider() {
       try {
         const res = await getTopAnime();
         if (Array.isArray(res.data)) {
-          setAnimes(res.data.slice(0, 5)); // Lấy top 5 anime
+          setAnimes(res.data.slice(0, 10)); // Lấy top 5 anime
         } else {
           console.log('Dữ liệu trả về lỗi:');
         }
@@ -115,6 +115,7 @@ const handleWatchTrailer = async (animeId) => {
 }
 
 const HeroSlideItem = ({ anime, onWatchTrailer }) => {
+  const navigate = useNavigate();
   return (
     <div className="hero-slide__item ">
       <div className="hero-slide__item__content">
@@ -124,7 +125,7 @@ const HeroSlideItem = ({ anime, onWatchTrailer }) => {
             <div className="hero-slide__item__content__overview text-multiline">{anime.synopsis}</div>
           </h2>
           <div className="hero-slide__item__content__btns">
-            <Button className='btn'>
+            <Button className='btn' onClick={() => navigate(`/anime/${anime.mal_id}`)}>
               Watch now
             </Button>
             <Button className="btn-outline" onClick={() => onWatchTrailer(anime.mal_id)}>
