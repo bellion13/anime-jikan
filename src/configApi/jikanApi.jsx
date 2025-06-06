@@ -33,11 +33,12 @@ export const getAnimeTrailer = async (id) => {
   const res = await api.get(`/anime/${id}`);
   return res.data.data.trailer;
 };
-//aniem tương tự
-export const getAnimeSimilar = async (id) => {
-  const res = await api.get(`/anime/${id}/recommendations`);
-  return res.data.data; //
+//aniem theo mua
+export const getSeasonalAnime = async () => {
+  const res = await api.get(`/seasons/now`);
+  return res.data.data;
 };
+
 export const searchAnime = async (query) => {
   const res = await api.get(`/anime`, {
     params: {

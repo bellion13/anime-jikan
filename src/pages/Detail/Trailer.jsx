@@ -5,24 +5,26 @@ import { getAnimeTrailer } from '../../configApi/jikanApi';
 const Trailer = () => {
   const { id } = useParams(); // lấy id từ URL
   const [trailer, setTrailer] = useState(null);
+  const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
   useEffect(() => {
     const fetchAnimeTrailer = async () => {
       try {
         const res = await getAnimeTrailer(id); // truyền id vào
-        setTrailer(res); 
+        await delay(1500); // chờ 1.5 giây
+        setTrailer(res);
       } catch (error) {
         console.error('Error fetching anime trailer:', error);
       }
     };
-    fetchAnimeTrailer(); // gọi hàm đúng cách
+    fetchAnimeTrailer();
   }, [id]);
 
   return (
     <div>
-      {trailer?.youtube_id && (
-        <div className="trailer-container">
-          <h2>Trailer</h2>
+      <div className="trailer-container">
+        <h2>Trailer</h2>
+        {trailer?.youtube_id ? (
           <iframe
             width="100%"
             height="750"
@@ -32,8 +34,11 @@ const Trailer = () => {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
-        </div>
-      )}
+        ) : (
+          <p>Hiện tại chưa có trailer cho anime này.</p>
+        )}
+      </div>
+
     </div>
   );
 };

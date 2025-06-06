@@ -4,11 +4,13 @@ import { useParams } from 'react-router-dom';
 import { getAnimeDetails, getAnimeCharacters } from '../../configApi/jikanApi';
 import './Detail.scss';
 import Trailer from './Trailer';
-import Similar from './Similar';
+import Seasonal from './Seasonal';
 const Detail = () => {
   const { id } = useParams();
   const [anime, setAnime] = useState(null);
   const [characters, setCharacters] = useState([]);
+
+
   useEffect(() => {
     const fetchDetail = async () => {
       try {
@@ -16,6 +18,7 @@ const Detail = () => {
 
         const res = await getAnimeDetails(id);
         setAnime(res.data);
+
         // Lấy danh sách nhân vật
         const charRes = await getAnimeCharacters(id);
         // console.log('Characters:', charRes.data);
@@ -44,7 +47,7 @@ const Detail = () => {
             <p><strong>Giới thiệu :</strong> {anime.synopsis}</p>
             <p><strong>Thể loại:</strong> {anime.genres.map((genre) => genre.name).join(', ')}</p>
             <p><strong>Trạng thái:</strong> {anime.status}</p>
-            <p className='characters'><strong>Nhân Vật:</strong> 
+            <div className='characters'><strong>Nhân Vật:</strong> 
               <ul className="character-list">
                 {characters && characters.slice(0, 5).map((item) => (
                   <li key={item.character.mal_id}>
@@ -52,13 +55,13 @@ const Detail = () => {
                   </li>
                 ))}
               </ul>
-            </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <Trailer />
-    <Similar/>
+    <Seasonal id={id}/>
   </>
   );
 };
