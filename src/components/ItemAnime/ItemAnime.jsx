@@ -8,8 +8,20 @@ import { Link } from 'react-router-dom';
 
 import './ItemAnime.scss';
 
-const ItemAnime = ({ image, title, synopsis, rating, episodes, rank, mal_id }) => {
+// const ItemAnime = ({ image, title, synopsis, score, episodes, rank, mal_id }) => {
   // console.log(mal_id);
+  const ItemAnime = ({ item }) => {
+  const {
+    mal_id,
+    title,
+    synopsis,
+    images,
+    score,
+    episodes,
+    rank
+  } = item;
+
+  const image = images?.jpg?.image_url;
   return (
     <Link to={`/anime/${mal_id}`} className="list-anime__item">
       <Tippy 
@@ -19,7 +31,7 @@ const ItemAnime = ({ image, title, synopsis, rating, episodes, rank, mal_id }) =
             <h4>{title}</h4>
             <p>{synopsis}</p>
             <p><strong>BXH: #</strong> {rank}</p>
-            <p><strong>Đánh giá:</strong> {rating}</p>
+            <p><strong>Đánh giá:</strong> {score}</p>
             <p><strong>Tập phim:</strong> {episodes}</p>
           </div>
         }

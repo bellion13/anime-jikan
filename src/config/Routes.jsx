@@ -9,6 +9,7 @@ const Routers = () => {
     // <BrowserRouter>
     <Routes>
       {/* <Route path="/:category/search/:keyword" element={<Catalog />} /> */}
+      <Route path="/catalog/:category" element={<Catalog />} />
       <Route path="/:category/:id" element={<Detail />} />
       <Route path="/:category" element={<Catalog />} />
       <Route path="/anime/:id" element={<Detail />} />

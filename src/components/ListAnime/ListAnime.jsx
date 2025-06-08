@@ -37,6 +37,7 @@ useEffect(() => {
     return (
         <div className='section'>
             <AnimeSlider title="BXH Anime" list={topAnime} />
+            
             <AnimeSlider title="Movies" list={movieList} />
             <AnimeSlider title="List Anime" list={animeList} />
         </div>

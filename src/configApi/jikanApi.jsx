@@ -5,6 +5,13 @@ const api = axios.create({
   baseURL: 'https://api.jikan.moe/v4',
   timeout: 10000,
 });
+export const getAnimeByCategory = (category) => {
+  const type = category === 'anime' ? 'tv' :
+               category === 'movie' ? 'movie' : '';
+  const url = `https://api.jikan.moe/v4/anime?type=${type}&limit=24`; // limit có thể tùy chỉnh
+  return fetch(url).then(res => res.json());
+};
+
 export const getAllAnime  = async (page = 1) => {
   const res = await api.get(`/anime?page=${page}`);
   return res.data;

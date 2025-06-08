@@ -28,15 +28,7 @@ const AnimeSlider = ({ title, list }) => {
         >
           {uniqueList.map((anime) => (
             <SwiperSlide key={anime.mal_id}>
-              <ItemAnime
-                mal_id={anime.mal_id}
-                image={anime.images.jpg.image_url}
-                title={anime.title}
-                rating={anime.score}
-                episodes={anime.episodes}
-                rank={anime.rank}
-                synopsis={anime.synopsis}
-              />
+              <ItemAnime key={anime.mal_id} item={anime} />
             </SwiperSlide>
           ))}
         </Swiper>

@@ -22,10 +22,11 @@ const Trailer = () => {
   }, [id]);
 
   return (
-    <div className="trailer-container">
+    <div className="trailer-container ">
       <h2>Trailer</h2>
       {trailer?.youtube_id ? (
         <iframe
+          className="container"
           width="100%"
           height="750"
           src={`https://www.youtube.com/embed/${trailer.youtube_id}`}
