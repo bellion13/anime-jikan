@@ -21,10 +21,10 @@ const AnimeSlider = ({ title, list }) => {
           grabCursor={true}
           spaceBetween={10}
           slidesPerView={"auto"}
-          breakpoints={{
-            640: { slidesPerView: 2, spaceBetween: 20 },
-            1024: { slidesPerView: 3, spaceBetween: 30 },
-          }}
+          // breakpoints={{
+          //   640: { slidesPerView: 2, spaceBetween: 20 },
+          //   1024: { slidesPerView: 3, spaceBetween: 30 },
+          // }}
         >
           {uniqueList.map((anime) => (
             <SwiperSlide key={anime.mal_id}>

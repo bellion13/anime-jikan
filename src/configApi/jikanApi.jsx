@@ -45,13 +45,15 @@ export const getSeasonalAnime = async () => {
   const res = await api.get(`/seasons/now`);
   return res.data.data;
 };
-
-export const searchAnime = async (query) => {
-  const res = await api.get(`/anime`, {
-    params: {
-      q: query,
-      limit: 10,
-    },
-  });
-  return res.data;
+export const getSearchAnime = async (searchQuery, type = 'tv', page = 1, limit = 21) => {
+    const res = await api.get(`/anime`, {
+        params: {
+            q: searchQuery,
+            type: type,
+            page: page,
+            limit: limit
+        }
+    });
+    return res.data;
 };
+

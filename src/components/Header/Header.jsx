@@ -46,6 +46,7 @@ const Header = () => {
           <img src={logo} alt="Logo" />
           Ani Jikan
         </Link>
+
         <ul className="header__nav">
           {headerNav.map((item, index) => (
             <li key={index} className={index === active ? 'active' : ''}>
