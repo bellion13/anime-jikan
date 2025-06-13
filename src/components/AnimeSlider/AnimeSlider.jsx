@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "./AnimeSlider.scss";
 
-const AnimeSlider = ({ title, list }) => {
+const AnimeSlider = ({  list }) => {
   //  Lọc danh sách anime để không trùng `mal_id`
   const uniqueList = list.filter(
     (item, index, self) => index === self.findIndex((t) => t.mal_id === item.mal_id)
@@ -12,10 +12,6 @@ const AnimeSlider = ({ title, list }) => {
 
   return (
     <div className="container">
-      <div className="list-anime-top">
-        <h2 className="list-anime__title">{title}</h2>
-        <Button className="btn-outline list-anime__show">Show</Button>
-      </div>
       <div className="list-anime-bottom">
         <Swiper
           grabCursor={true}

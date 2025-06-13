@@ -46,7 +46,7 @@ const [totalPages, setTotalPages] = useState(1); // tổng số trang
     return (
         <>
             <PageHeader>
-                {category === 'anime' ? 'Anime Series' : 'Anime Movies'}
+                {category === 'anime' ? 'Anime Series' : 'Movies Anime'}
             </PageHeader>
             <SearchAnime
                 onSearch={(value) => {

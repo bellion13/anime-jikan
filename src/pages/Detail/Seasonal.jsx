@@ -20,7 +20,8 @@ const Seasonal = () => {
 
   return (
     <div className='section'>
-      <AnimeSlider title="Anime Theo mùa" list={animeSeasonal} />
+      <h2 className='section-title'>Anime Mùa Hiện Tại</h2>
+      <AnimeSlider list={animeSeasonal} />
     </div>
   );
 };
