@@ -1,14 +1,13 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useEffect, useState } from 'react';
 import Button from './../../components/Button/Button';
-import { getTopAnime ,getAnimeTrailer } from '../../configApi/jikanApi';
+import { getTopAnime, getAnimeTrailer } from '../../configApi/jikanApi';
 import { useNavigate } from 'react-router-dom';
 
 import './HeroSlider.scss';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-// import background from '../../assets/images/background.jpg';
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
@@ -45,20 +44,20 @@ function HeroSlider() {
     }
   }, [isOpen, swiperInstance]);
   // Gọi trailer khi nhấn nút
-const handleWatchTrailer = async (animeId) => {
-  try {
-    const trailer = await getAnimeTrailer(animeId);
-    const id = trailer?.youtube_id;
-    if (id) {
-      setYoutubeId(id);
-      setIsOpen(true);
-    } else {
-      alert("Không có trailer");
+  const handleWatchTrailer = async (animeId) => {
+    try {
+      const trailer = await getAnimeTrailer(animeId);
+      const id = trailer?.youtube_id;
+      if (id) {
+        setYoutubeId(id);
+        setIsOpen(true);
+      } else {
+        alert("Không có trailer");
+      }
+    } catch (err) {
+      console.error("Lỗi lấy trailer:", err);
     }
-  } catch (err) {
-    console.error("Lỗi lấy trailer:", err);
-  }
-};
+  };
   return (
 
     <>
@@ -71,16 +70,16 @@ const handleWatchTrailer = async (animeId) => {
         }}
         loop={true}
         pagination={{ clickable: true }}
-        spaceBetween={30}
+        spaceBetween={15}
         slidesPerView={1}
         className='hero-slider'
 
       >
         {animes && animes.length > 0 && animes.map((anime) => (
           <SwiperSlide key={anime.mal_id}>
-            <img
-              src={anime.images.jpg.large_image_url}
-              alt={anime.title}
+            <div
+              className="hero-slide__bg"
+              style={{ backgroundImage: `url(${anime.images.jpg.large_image_url})` }}
             />
             <HeroSlideItem anime={anime} onWatchTrailer={handleWatchTrailer} />
           </SwiperSlide>
