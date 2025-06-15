@@ -64,10 +64,6 @@
     box-shadow: 0 7px 29px 0 #64646f33;
     border-radius: 20px;
     overflow: hidden;
-    transition: transform 0.5s ease;
-    &:hover {
-        transform: scale(1.05);
-    }
     & img {
         cursor: pointer;
         opacity: 1;
@@ -120,4 +116,64 @@
     background-repeat: no-repeat;
     z-index: 0;
     opacity: 0.5;
+}
+
+
+.hero-slide__item {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+
+  &.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hero-slide__item__content {
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .hero-slide__item__content__title {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition-delay: 0.1s; // chạy sớm nhất
+  }
+
+  .hero-slide__item__content__overview {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    transition-delay: 0.3s; // chạy sau title
+  }
+
+  .hero-slide__item__content__btns {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    transition-delay: 0.5s; // chạy sau overview
+  }
+
+  .hero-slide__item__content__poster {
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    // transition-delay: 0.7s; // chạy sau tất cả
+    transform: scale(0);
+  }
+
+  &.active {
+    .hero-slide__item__content__title,
+    .hero-slide__item__content__overview,
+    .hero-slide__item__content__btns {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .hero-slide__item__content__poster {
+      opacity: 1;
+        transform: scale(1);
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+  }
 }

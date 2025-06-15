@@ -13,6 +13,8 @@ Modal.setAppElement('#root');
 
 import { Autoplay } from 'swiper/modules';
 function HeroSlider() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
   const [animes, setAnimes] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [youtubeId, setYoutubeId] = useState('');
@@ -23,7 +25,7 @@ function HeroSlider() {
       try {
         const res = await getTopAnime();
         if (Array.isArray(res.data)) {
-          setAnimes(res.data.slice(0, 10)); // Lấy top 5 anime
+          setAnimes(res.data.slice(0, 20)); // Lấy top 5 anime
         } else {
           console.log('Dữ liệu trả về lỗi:');
         }
@@ -63,25 +65,26 @@ function HeroSlider() {
     <>
       <Swiper
         onSwiper={setSwiperInstance}
+        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
         modules={[Autoplay]}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
         loop={true}
         pagination={{ clickable: true }}
         spaceBetween={15}
         slidesPerView={1}
         className='hero-slider'
-
       >
-        {animes && animes.length > 0 && animes.map((anime) => (
+        {animes && animes.length > 0 && animes.map((anime, index) => (
           <SwiperSlide key={anime.mal_id}>
             <div
               className="hero-slide__bg"
               style={{ backgroundImage: `url(${anime.images.jpg.large_image_url})` }}
             />
-            <HeroSlideItem anime={anime} onWatchTrailer={handleWatchTrailer} />
+            <HeroSlideItem
+              anime={anime}
+              onWatchTrailer={handleWatchTrailer}
+              isActive={index === activeIndex}
+            />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -113,10 +116,10 @@ function HeroSlider() {
 
 }
 
-const HeroSlideItem = ({ anime, onWatchTrailer }) => {
+const HeroSlideItem = ({ anime, onWatchTrailer, isActive }) => {
   const navigate = useNavigate();
   return (
-    <div className="hero-slide__item ">
+    <div className={`hero-slide__item ${isActive ? 'active' : ''}`}>
       <div className="hero-slide__item__content">
         <div className="hero-slide__item__content__info">
           <h2 className="hero-slide__item__content__info__title">
@@ -139,6 +142,7 @@ const HeroSlideItem = ({ anime, onWatchTrailer }) => {
     </div>
   )
 }
+
 
 
 export default HeroSlider;
