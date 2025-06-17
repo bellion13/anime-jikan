@@ -35,3 +35,18 @@
     opacity: 0.5;
     cursor: not-allowed;
 }
+// reponsive
+@media (max-width: 768px) {
+    .catalog__list {
+        padding: 28px;
+    }
+
+    .pagination {
+        margin: 20px 0;
+        margin-top: 36px;
+    }
+    .pagination button {
+        padding: 4px 8px;
+        font-size: 14px;
+    }
+}

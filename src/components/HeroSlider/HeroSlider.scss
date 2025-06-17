@@ -177,3 +177,21 @@
     }
   }
 }
+///reponsive 
+@media (max-width: 768px) {
+    .hero-slide__item__content {
+        padding: 10px;
+    }
+    .hero-slide__item__content__info {
+        margin-right: 0;
+    }
+    .hero-slide__item__content__title {
+        font-size: 40px;
+    }
+    .hero-slide__item__content__overview {
+        font-size: 14px;
+    }
+    .hero-slide__item__content__poster {
+        display: none;
+    }
+}

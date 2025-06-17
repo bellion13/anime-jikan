@@ -44,12 +44,12 @@ const Detail = () => {
             <h1 className="detail-title">{anime.title}</h1>
             <p><strong>Đánh giá:</strong> {anime.score}</p>
             <p><strong>Số tập:</strong> {anime.episodes}</p>
-            <p><strong>Giới thiệu :</strong> {anime.synopsis}</p>
+            <p  style={{ textAlign: 'justify' }}><strong >Giới thiệu :</strong> {anime.synopsis}</p>
             <p><strong>Thể loại:</strong> {anime.genres.map((genre) => genre.name).join(', ')}</p>
             <p><strong>Trạng thái:</strong> {anime.status}</p>
             <div className='characters'><strong>Nhân Vật:</strong> 
               <ul className="character-list">
-                {characters && characters.slice(0, 5).map((item) => (
+                {characters && characters.slice(0,5).map((item) => (
                   <li key={item.character.mal_id}>
                     {item.character.name}
                   </li>

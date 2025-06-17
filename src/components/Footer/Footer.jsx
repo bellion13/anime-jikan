@@ -10,7 +10,6 @@ function Footer() {
         <div className='footer__img'></div>
             <div className="footer__content">
                 <div className="footer__content__logo">
-                    
                     <Link to='/'> <img src={logo} alt="logo" />Ani Jikan</Link>
                 </div>
             </div>
