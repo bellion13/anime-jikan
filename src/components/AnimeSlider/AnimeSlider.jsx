@@ -11,7 +11,7 @@ const AnimeSlider = ({  list }) => {
   );
 
   return (
-    <div className="container">
+    <div className="list-anime">
       <div className="list-anime-bottom">
         <Swiper
           grabCursor={true}
