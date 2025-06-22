@@ -23,7 +23,7 @@ import './ItemAnime.scss';
 
   const image = images?.jpg?.image_url;
   return (
-    <Link to={`/anime/${mal_id}`} className="list-anime__item">
+    <Link to={`/anime/${mal_id}`} onClick={window.scrollTo(0,0)} className="list-anime__item">
       <Tippy 
         className="anime-tooltip"
         content={
