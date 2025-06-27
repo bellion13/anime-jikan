@@ -5,6 +5,7 @@ import { getAnimeDetails, getAnimeCharacters } from '../../configApi/jikanApi';
 import './Detail.scss';
 import Trailer from './Trailer';
 import Seasonal from './Seasonal';
+
 const Detail = () => {
   const { id } = useParams();
   const [anime, setAnime] = useState(null);
@@ -61,7 +62,7 @@ const Detail = () => {
       </div>
     </div>
     <Trailer />
-    <Seasonal id={id}/>
+    <Seasonal id={id} />
   </>
   );
 };
